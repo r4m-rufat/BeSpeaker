@@ -1,60 +1,85 @@
 package com.codingwithrufat.bespeaker.presentation.ui.register
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.codingwithrufat.bespeaker.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.codingwithrufat.bespeaker.common.checkEmail
+import com.codingwithrufat.bespeaker.common.checkPassword
+import com.codingwithrufat.bespeaker.common.equal
+import com.codingwithrufat.bespeaker.databinding.FragmentRegisterBinding
+import com.codingwithrufat.bespeaker.domain.model.UserRegister
+import com.codingwithrufat.bespeaker.domain.util.NetworkResponse
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val TAG = "RegisterFragment"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentRegisterBinding? = null
+    private lateinit var viewModel: RegisterViewModel
+
+    private val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+
+        _binding = FragmentRegisterBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
+
+        observeUserRegisterState()
+        clickedSignUpButton()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegisterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun clickedSignUpButton() {
+        binding.buttonSignup.setOnClickListener {
+            registerUser()
+
+        }
+    }
+
+    private fun observeUserRegisterState() {
+        viewModel.observeRegisterCase.observe(viewLifecycleOwner) { response ->
+
+            when (response) {
+                is NetworkResponse.LOADING -> Log.d(TAG, "onCreateView: User is registering now")
+
+                is NetworkResponse.SUCCEED -> Log.d(
+                    TAG,
+                    "onCreateView: User successfully registered"
+                )
+
+                is NetworkResponse.ERROR -> {
+                    Log.d(TAG, "onCreateView: Error is ${response.error_msg}")
                 }
             }
+
+        }
     }
+
+    private fun registerUser() {
+
+        if (binding.editEmail.checkEmail()
+            && binding.editPassword.checkPassword()
+            && binding.editConfirmPassword.checkPassword()
+            && binding.editPassword equal binding.editConfirmPassword
+        ){
+            val userRegister = UserRegister.Builder()
+                .email(binding.editEmail.text?.trim().toString())
+                .password(binding.editPassword.text?.trim().toString())
+                .build()
+            viewModel.register(userRegister)
+        }
+
+    }
+
 }
