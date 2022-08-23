@@ -43,7 +43,7 @@ dependencies {
 
     def lifecycle_version = "2.5.1"
     def nav_version = "2.3.5"
-    def dagger_version = "2.38.1"
+    def dagger_version = "2.42"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

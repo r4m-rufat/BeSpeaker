@@ -3,20 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/completeProfileFragment">
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.codingwithrufat.bespeaker.presentation.ui.register.RegisterFragment"
+        android:name="com.codingwithrufat.bespeaker.features.feature_auth.presentation.ui.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_completeProfileFragment"
+            app:destination="@id/completeProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.codingwithrufat.bespeaker.presentation.ui.login.LoginFragment"
+        android:name="com.codingwithrufat.bespeaker.features.feature_auth.presentation.ui.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_completeProfileFragment"
+            app:destination="@id/completeProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/completeProfileFragment"
+        android:name="com.codingwithrufat.bespeaker.features.feature_auth.presentation.ui.complete_profile.CompleteProfileFragment"
+        android:label="fragment_complete_profile"
+        tools:layout="@layout/fragment_complete_profile" />
 </navigation>
