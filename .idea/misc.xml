@@ -7,10 +7,11 @@
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/gradient_person_profile_add_background.xml" value="0.172" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_camera.xml" value="0.172" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1595" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_person.xml" value="0.2155" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/white_border_background.xml" value="0.1895" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/activity_complete_profile.xml" value="0.2734375" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_complete_profile.xml" value="0.264" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_complete_profile.xml" value="0.2" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_login.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_register.xml" value="0.264" />
       </map>

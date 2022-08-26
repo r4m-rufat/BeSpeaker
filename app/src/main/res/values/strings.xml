@@ -2,6 +2,8 @@
     <string name="app_name">BeSpeaker</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_content">image_content</string>
+    <string name="complete_your_profile">Complete Your Profile</string>
 
     <string-array name="levels">
         <item>Beginner</item>

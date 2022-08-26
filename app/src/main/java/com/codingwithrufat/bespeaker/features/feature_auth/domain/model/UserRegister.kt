@@ -12,6 +12,8 @@ data class UserRegister (
     var birthday: String? = null,
     var gender: GenderType? = null,
     var english_level: EnglishLevel? = null,
+    var profile_image_link: String? = null,
+    var complete_profile_status: Boolean? = null
 ) {
     companion object {
         fun Builder(): UserBuilder = UserBuilder()
@@ -62,6 +64,11 @@ class UserBuilder {
 
     fun englishLevel(englishLevel: EnglishLevel): UserBuilder {
         userRegister.english_level = englishLevel
+        return this
+    }
+
+    fun profileImageLink(profileImageLink: String): UserBuilder {
+        userRegister.profile_image_link = profileImageLink
         return this
     }
 

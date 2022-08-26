@@ -16,11 +16,14 @@ class RegisterRepository_Impl @Inject constructor(
 
     override suspend fun registerUser(userRegister: UserRegister) = callbackFlow {
 
-        val callback = firebaseAuth.createUserWithEmailAndPassword(userRegister.email!!, userRegister.password!!).addOnCompleteListener { task ->
+        var callback = firebaseAuth.createUserWithEmailAndPassword(
+            userRegister.email!!,
+            userRegister.password!!
+        ).addOnCompleteListener { task ->
 
-            if (task.isSuccessful){
-                trySend(NetworkResponse.SUCCEED)
-            }else {
+            if (task.isSuccessful) {
+                trySend(NetworkResponse.SUCCEED())
+            } else {
                 task.exception?.let {
                     trySend(NetworkResponse.ERROR(it))
                 }
@@ -31,7 +34,7 @@ class RegisterRepository_Impl @Inject constructor(
         }
 
         awaitClose {
-            callback.isCanceled
+            //TODO unsubscribe listener
         }
 
     }.flowOn(IO)
