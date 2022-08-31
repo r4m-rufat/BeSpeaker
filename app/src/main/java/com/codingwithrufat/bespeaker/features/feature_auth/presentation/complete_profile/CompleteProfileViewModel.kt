@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.features.feature_auth.presentation.ui.complete_profile
+package com.codingwithrufat.bespeaker.features.feature_auth.presentation.complete_profile
 
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +17,7 @@ class CompleteProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _imageAndCompleteProfileState =
-        MutableLiveData<NetworkResponse>(NetworkResponse.LOADING())
+        MutableLiveData<NetworkResponse>()
 
     val imageAndCompleteProfileState
         get() = _imageAndCompleteProfileState

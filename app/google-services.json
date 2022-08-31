@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "264584568782",
-    "project_id": "bespeaker-1fd85",
-    "storage_bucket": "bespeaker-1fd85.appspot.com"
+    "project_number": "488233870948",
+    "project_id": "bespeaker-62103",
+    "storage_bucket": "bespeaker-62103.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:264584568782:android:a8b67018f7b72ff016159f",
+        "mobilesdk_app_id": "1:488233870948:android:00f55c5969d74d4b4b2171",
         "android_client_info": {
           "package_name": "com.codingwithrufat.bespeaker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "264584568782-v1it1qc5divpt3in2dot76veu93ovmf9.apps.googleusercontent.com",
+          "client_id": "488233870948-ek37l9kvs96vfi5tqe017d3k8ltvj49k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC3GuIEUip2qYREXV4VG-SEOxW2H0HKoNE"
+          "current_key": "AIzaSyBzSD2suBHCq7KJIlaSmE-0O-EDeZ0PSrY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "264584568782-v1it1qc5divpt3in2dot76veu93ovmf9.apps.googleusercontent.com",
+              "client_id": "488233870948-ek37l9kvs96vfi5tqe017d3k8ltvj49k.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

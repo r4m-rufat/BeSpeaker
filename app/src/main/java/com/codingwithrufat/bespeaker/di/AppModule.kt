@@ -1,12 +1,14 @@
 package com.codingwithrufat.bespeaker.di
 
-import android.content.Context
 import com.codingwithrufat.bespeaker.features.feature_auth.data.repository.CompletePorfileRepository_Impl
+import com.codingwithrufat.bespeaker.features.feature_auth.data.repository.LoginRepository_Impl
 import com.codingwithrufat.bespeaker.features.feature_auth.data.repository.RegisterRepository_Impl
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.repository.CompleteProfile
+import com.codingwithrufat.bespeaker.features.feature_auth.domain.repository.LoginRepository
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.repository.RegisterRepository
+import com.codingwithrufat.bespeaker.features.feature_splash.data.repository.CheckUserRepository_Impl
+import com.codingwithrufat.bespeaker.features.feature_splash.domain.repository.CheckUser
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -23,7 +25,7 @@ class AppModule {
     fun provideFirebaseAuth() = FirebaseAuth.getInstance()
 
     @Provides
-    fun provideRepo(auth: FirebaseAuth): RegisterRepository = RegisterRepository_Impl(auth)
+    fun provideRegisterRepo(auth: FirebaseAuth, db: FirebaseFirestore): RegisterRepository = RegisterRepository_Impl(auth, db)
 
     @Provides
     fun provideStorageReference() = FirebaseStorage.getInstance().reference.child("images/")
@@ -36,7 +38,12 @@ class AppModule {
         storageReference: StorageReference,
         auth: FirebaseAuth,
         db: FirebaseFirestore
-    ): CompleteProfile = CompletePorfileRepository_Impl(storageReference, auth.currentUser, db)
+    ): CompleteProfile = CompletePorfileRepository_Impl(storageReference, auth, db)
 
+    @Provides
+    fun provideLoginRepo(auth: FirebaseAuth, db: FirebaseFirestore): LoginRepository = LoginRepository_Impl(auth, db)
+
+    @Provides
+    fun provideCheckUserRepo(auth: FirebaseAuth, db: FirebaseFirestore): CheckUser = CheckUserRepository_Impl(auth, db)
 
 }

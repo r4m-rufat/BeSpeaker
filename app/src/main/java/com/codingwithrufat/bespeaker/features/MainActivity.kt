@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.features.feature_auth.presentation
+package com.codingwithrufat.bespeaker.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class AuthenticationActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -16,6 +16,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
 
     }

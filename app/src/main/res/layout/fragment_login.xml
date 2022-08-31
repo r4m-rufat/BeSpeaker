@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_auth_background"
-    tools:context=".features.feature_auth.presentation.ui.login.LoginFragment">
+    tools:context=".features.feature_auth.presentation.login.LoginFragment">
 
 
     <ScrollView
@@ -82,7 +82,7 @@
                     app:hintTextColor="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edit_username"
+                        android:id="@+id/edit_password"
                         android:textSize="15sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
 
 
                 <Button
-                    android:id="@+id/button_signup"
+                    android:id="@+id/button_signin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

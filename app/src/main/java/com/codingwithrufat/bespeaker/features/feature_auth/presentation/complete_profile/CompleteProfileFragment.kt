@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.features.feature_auth.presentation.ui.complete_profile
+package com.codingwithrufat.bespeaker.features.feature_auth.presentation.complete_profile
 
 import android.app.Activity
 import android.content.Intent
@@ -10,15 +10,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.codingwithrufat.bespeaker.common.DatePickerDialog
 import com.codingwithrufat.bespeaker.common.IMAGE_RESULT_OK
+import com.codingwithrufat.bespeaker.common.hideHorizontalProgress
+import com.codingwithrufat.bespeaker.common.showHorizontalProgress
 import com.codingwithrufat.bespeaker.databinding.FragmentCompleteProfileBinding
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.model.UserRegister
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.EnglishLevel
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.GenderType
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.NetworkResponse
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -37,7 +41,17 @@ class CompleteProfileFragment : Fragment() {
     // vars
     private var imageUri: Uri? = null
     private lateinit var viewModel: CompleteProfileViewModel
+    private var email: String = ""
+    private var password: String = ""
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            email = it.getString("email")!!
+            password = it.getString("password")!!
+            Log.d(TAG, "onCreate: Email -> $email and Password -> $password")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +73,11 @@ class CompleteProfileFragment : Fragment() {
 
         binding.completeProfileButton.setOnClickListener {
 
+            imageUri?.let {
+                Log.d(TAG, "clickedCompleteButton: Image uri is not empty")
+                viewModel.loadImageToDB(it)
 
+            }
             observeCompleteProfileAndLoadingImageProgress()
 
         }
@@ -69,21 +87,26 @@ class CompleteProfileFragment : Fragment() {
     private fun getUserInputsAndExecuteViewModelActions(imageLink: String) {
 
         val userRegister = UserRegister.Builder()
+            .id(FirebaseAuth.getInstance().currentUser!!.uid)
+            .email(email)
+            .password(password)
             .name(binding.editName.text.trim().toString())
             .surname(binding.editSurname.text.trim().toString())
-            .englishLevel(EnglishLevel.values()[binding.englishLevelSpinner.selectedItemPosition])
-            .birthday("${binding.txtDay.text}-${binding.txtMonth.text}-${binding.txtDay.text}")
-            .gender(GenderType.values()[binding.genderRadioGroup.checkedRadioButtonId])
+            .englishLevel(EnglishLevel.values()[binding.englishLevelSpinner.selectedItemPosition].string)
+            .birthday("${binding.txtDay.text}-${binding.txtMonth.text}-${binding.txtYear.text}")
+            .gender(GenderType.values()[getSelectedRadioButtonIndex()].name)
             .profileImageLink(imageLink)
+            .completeStatus(true)
             .build()
 
-        imageUri?.let {
-
-            viewModel.loadImageToDB(it)
-
-        }
         viewModel.completeProfile(userRegister)
 
+    }
+
+    private fun getSelectedRadioButtonIndex(): Int {
+        val radioButtonId = binding.genderRadioGroup.checkedRadioButtonId
+        val radioButton = binding.genderRadioGroup.findViewById<RadioButton>(radioButtonId)
+        return binding.genderRadioGroup.indexOfChild(radioButton)
     }
 
     private fun observeCompleteProfileAndLoadingImageProgress() {
@@ -96,27 +119,48 @@ class CompleteProfileFragment : Fragment() {
          */
         viewModel.imageAndCompleteProfileState.observe(viewLifecycleOwner) { response ->
 
-            when(response) {
+            when (response) {
 
                 is NetworkResponse.SUCCEED ->
                     if (response.value is String) { // this means image link came
+                        Log.d(
+                            TAG,
+                            "observeCompleteProfileAndLoadingImageProgress: Link is ${response.value}}"
+                        )
                         getUserInputsAndExecuteViewModelActions(response.value)
-                    }else { // if it is null then all of actions is completed
+                    } else { // if it is null then all of actions is completed
                         // TODO to navigate Home Fragment
+                        binding.progressLayout.hideHorizontalProgress()
+                        Log.d(
+                            TAG,
+                            "observeCompleteProfileAndLoadingImageProgress: We can navigate to home "
+                        )
                     }
 
                 is NetworkResponse.LOADING -> {
 
-                    if (response.percent is Int){ // it means file is uploading now and it returns percentage
-                        // TODO showProgress(percentage)
+                    if (response.percent != null){
+                        // file is uploading now and it returns percentage
+                        Log.d(
+                            TAG,
+                            "observeCompleteProfileAndLoadingImageProgress: Loading...(${response.percent})"
+                        )
+                        binding.progressLayout.showHorizontalProgress(binding.progressHorizontal, binding.txtTitle, binding.txtPercent, response.percent, "Uploading your photo...")
                     }else {
-                        // TODO showProgress(string)
+                        binding.progressLayout.showHorizontalProgress(binding.txtTitle, binding.txtPercent, "Completing your profile...")
+                        Log.d(
+                            TAG,
+                            "observeCompleteProfileAndLoadingImageProgress: Everything loaded"
+                        )
+
                     }
+
 
                 }
 
                 is NetworkResponse.ERROR -> {
                     // TODO hideProgress
+                    binding.progressLayout.hideHorizontalProgress()
                     Log.d(
                         TAG,
                         "observeCompleteProfileAndLoadingImageProgress: Error is -> \n ${response.error_msg.message}"

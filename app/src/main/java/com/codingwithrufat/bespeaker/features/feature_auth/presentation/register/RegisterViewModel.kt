@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.features.feature_auth.presentation.ui.register
+package com.codingwithrufat.bespeaker.features.feature_auth.presentation.register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +16,7 @@ class RegisterViewModel  @Inject constructor(
     private val registerUseCase: RegisterUseCase
 ): ViewModel() {
 
-    private var _register = MutableLiveData<NetworkResponse>(NetworkResponse.LOADING())
+    private var _register = MutableLiveData<NetworkResponse>()
 
     val observeRegisterCase: LiveData<NetworkResponse>
     get() = _register

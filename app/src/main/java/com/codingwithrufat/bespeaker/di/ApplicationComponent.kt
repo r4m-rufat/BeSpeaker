@@ -1,9 +1,9 @@
 package com.codingwithrufat.bespeaker.di
 
-import com.codingwithrufat.bespeaker.features.feature_auth.presentation.AuthenticationActivity
+import com.codingwithrufat.bespeaker.features.MainActivity
 import dagger.Component
 
 @Component
 interface ApplicationComponent {
-    fun inject(authenticationActivity: AuthenticationActivity)
+    fun inject(authenticationActivity: MainActivity)
 }

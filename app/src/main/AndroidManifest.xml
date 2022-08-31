@@ -17,10 +17,7 @@
         android:theme="@style/Theme.BeSpeaker"
         tools:targetApi="31" >
         <activity
-            android:name=".CompleteProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.codingwithrufat.bespeaker.features.feature_auth.presentation.AuthenticationActivity"
+            android:name="com.codingwithrufat.bespeaker.features.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,17 +1,14 @@
 package com.codingwithrufat.bespeaker.features.feature_auth.domain.model
 
-import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.EnglishLevel
-import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.GenderType
-
 data class UserRegister (
-    var id: Int? = null,
+    var uid: String? = null,
     var email: String? = null,
     var password: String? = null,
     var name: String? = null,
     var surname: String? = null,
     var birthday: String? = null,
-    var gender: GenderType? = null,
-    var english_level: EnglishLevel? = null,
+    var gender: String? = null,
+    var english_level: String? = null,
     var profile_image_link: String? = null,
     var complete_profile_status: Boolean? = null
 ) {
@@ -27,8 +24,8 @@ class UserBuilder {
 
     private var userRegister: UserRegister = UserRegister()
 
-    fun id(id: Int): UserBuilder {
-        userRegister.id = id
+    fun id(id: String): UserBuilder {
+        userRegister.uid = id
         return this
     }
 
@@ -57,18 +54,23 @@ class UserBuilder {
         return this
     }
 
-    fun gender(gender: GenderType): UserBuilder {
+    fun gender(gender: String): UserBuilder {
         userRegister.gender = gender
         return this
     }
 
-    fun englishLevel(englishLevel: EnglishLevel): UserBuilder {
+    fun englishLevel(englishLevel: String): UserBuilder {
         userRegister.english_level = englishLevel
         return this
     }
 
     fun profileImageLink(profileImageLink: String): UserBuilder {
         userRegister.profile_image_link = profileImageLink
+        return this
+    }
+
+    fun completeStatus(status: Boolean): UserBuilder {
+        userRegister.complete_profile_status = status
         return this
     }
 

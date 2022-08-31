@@ -41,8 +41,7 @@ android {
 dependencies {
 
 
-    implementation 'com.google.firebase:firebase-storage:20.0.1'
-    implementation 'com.google.firebase:firebase-firestore:24.2.2'
+
     def lifecycle_version = "2.5.1"
     def nav_version = "2.3.5"
     def dagger_version = "2.42"
@@ -73,13 +72,22 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Firebase Authentication
-    implementation 'com.google.firebase:firebase-auth:21.0.7'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.7'
 
-    // Dagger
+    // Firebase Storage
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
+
+    // Firebase Firestore
+    implementation 'com.google.firebase:firebase-firestore:24.2.2'
+
+    // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$dagger_version"
     // Annotation processor
     kapt "com.google.dagger:hilt-android-compiler:$dagger_version"
 
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    
 }
 
 // Allow references to generated code
