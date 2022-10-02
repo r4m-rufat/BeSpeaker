@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashMap
 
 class CompletePorfileRepository_Impl @Inject constructor(
     private val reference: StorageReference,
@@ -50,13 +51,22 @@ class CompletePorfileRepository_Impl @Inject constructor(
 
     override suspend fun completeUserProfile(userRegister: UserRegister) = callbackFlow {
 
+        val hashMap = HashMap<String, Any>()
+        hashMap["birthday"] = userRegister.birthday!!
+        hashMap["english_level"] = userRegister.english_level!!
+        hashMap["gender"] = userRegister.gender!!
+        hashMap["name"] = userRegister.name!!
+        hashMap["surname"] = userRegister.surname!!
+        hashMap["profile_image_link"] = userRegister.profile_image_link!!
+        hashMap["complete_profile_status"] = userRegister.complete_profile_status!!
+
         firebaseAuth.currentUser?.let {
 
             trySend(NetworkResponse.LOADING())
 
             db.collection("users")
                 .document(it.uid)
-                .set(userRegister)
+                .update(hashMap)
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful)

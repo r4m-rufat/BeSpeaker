@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import com.codingwithrufat.bespeaker.R
 import com.codingwithrufat.bespeaker.common.DatePickerDialog
 import com.codingwithrufat.bespeaker.common.IMAGE_RESULT_OK
 import com.codingwithrufat.bespeaker.common.hideHorizontalProgress
@@ -135,6 +137,7 @@ class CompleteProfileFragment : Fragment() {
                             TAG,
                             "observeCompleteProfileAndLoadingImageProgress: We can navigate to home "
                         )
+                        Navigation.findNavController(binding.root).navigate(R.id.homeFragment)
                     }
 
                 is NetworkResponse.LOADING -> {

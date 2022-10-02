@@ -10,6 +10,7 @@ data class UserRegister (
     var gender: String? = null,
     var english_level: String? = null,
     var profile_image_link: String? = null,
+    var last_seen: String? = null,
     var complete_profile_status: Boolean? = null
 ) {
     companion object {

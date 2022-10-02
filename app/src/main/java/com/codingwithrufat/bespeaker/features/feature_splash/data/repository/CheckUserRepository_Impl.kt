@@ -1,11 +1,14 @@
 package com.codingwithrufat.bespeaker.features.feature_splash.data.repository
 
+import android.util.Log
+import com.codingwithrufat.bespeaker.common.TAG
 import com.codingwithrufat.bespeaker.features.feature_splash.domain.repository.CheckUser
 import com.codingwithrufat.bespeaker.features.feature_splash.domain.util.CheckEmailResponse
 import com.codingwithrufat.bespeaker.features.feature_splash.domain.util.CheckProfileStatusResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -16,33 +19,43 @@ class CheckUserRepository_Impl @Inject constructor(
     private val db: FirebaseFirestore
 ): CheckUser {
 
-    override suspend fun checkUserEmailState() = flow{
+    override suspend fun checkUserEmailState() = callbackFlow{
 
         firebaseAuth.currentUser?.let { user ->
 
-            if (user.isEmailVerified)
-                emit(CheckEmailResponse.EmailIsVerified)
-            else
-                emit(CheckEmailResponse.EmailIsNotVerified)
+            user.reload().addOnSuccessListener {
+                if (user.isEmailVerified)
+                    trySend(CheckEmailResponse.EmailIsVerified)
+                else
+                    trySend(CheckEmailResponse.EmailIsNotVerified)
+
+            }.addOnFailureListener {
+                trySend(CheckEmailResponse.EmailIsNotVerified)
+            }
 
 
-        } ?: emit(CheckEmailResponse.NoAnyUser)
+        } ?: trySend(CheckEmailResponse.NoAnyUser)
+
+        awaitClose()
 
     }.flowOn(IO)
 
     override suspend fun checkUserProfileStatus() = callbackFlow {
 
         firebaseAuth.currentUser?.let { user ->
+
             db.collection("users")
                 .document(user.uid)
                 .get()
                 .addOnSuccessListener {
 
-                    it.getBoolean("complete_profile_status")?.let { profile_status ->
-                        if (profile_status)
+                    if (it.getBoolean("complete_profile_status") != null){
+                        if (it.getBoolean("complete_profile_status")!!)
                             trySend(CheckProfileStatusResponse.ProfileIsCompleted)
                         else
                             trySend(CheckProfileStatusResponse.ProfileIsNotCompleted)
+
+                        Log.d(TAG, "checkUserProfileStatus: ${it.getBoolean("complete_profile_status")}")
                     }
 
                 }.addOnFailureListener { exception ->
@@ -50,6 +63,7 @@ class CheckUserRepository_Impl @Inject constructor(
                 }
 
         }
+        awaitClose()
     }.flowOn(IO)
 
 

@@ -92,6 +92,7 @@ class RegisterFragment : Fragment() {
             val userRegister = UserRegister.Builder()
                 .email(email)
                 .password(password)
+                .completeStatus(false)
                 .build()
             viewModel.register(userRegister)
         }

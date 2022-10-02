@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.codingwithrufat.bespeaker"
-        minSdk 21
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -87,6 +87,9 @@ dependencies {
 
     // DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Agora video call
+//    implementation 'com.github.AgoraIO-Community.Android-UIKit:final:v4.0.1'
     
 }
 
