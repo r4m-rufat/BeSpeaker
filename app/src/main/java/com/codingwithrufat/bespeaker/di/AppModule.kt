@@ -6,6 +6,8 @@ import com.codingwithrufat.bespeaker.features.feature_auth.data.repository.Regis
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.repository.CompleteProfile
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.repository.LoginRepository
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.repository.RegisterRepository
+import com.codingwithrufat.bespeaker.features.feature_home.data.repository.HomePageRepository_Impl
+import com.codingwithrufat.bespeaker.features.feature_home.domain.repository.HomePageRepository
 import com.codingwithrufat.bespeaker.features.feature_splash.data.repository.CheckUserRepository_Impl
 import com.codingwithrufat.bespeaker.features.feature_splash.domain.repository.CheckUser
 import com.google.firebase.auth.FirebaseAuth
@@ -45,5 +47,8 @@ class AppModule {
 
     @Provides
     fun provideCheckUserRepo(auth: FirebaseAuth, db: FirebaseFirestore): CheckUser = CheckUserRepository_Impl(auth, db)
+
+    @Provides
+    fun provideHomePageRepo(auth: FirebaseAuth, db: FirebaseFirestore): HomePageRepository = HomePageRepository_Impl(auth, db)
 
 }
