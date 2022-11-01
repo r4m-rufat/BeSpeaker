@@ -1,7 +1,7 @@
 package com.codingwithrufat.bespeaker.features.feature_splash.data.repository
 
 import android.util.Log
-import com.codingwithrufat.bespeaker.common.TAG
+import com.codingwithrufat.bespeaker.common.utils.TAG
 import com.codingwithrufat.bespeaker.features.feature_splash.domain.repository.CheckUser
 import com.codingwithrufat.bespeaker.features.feature_splash.domain.util.CheckEmailResponse
 import com.codingwithrufat.bespeaker.features.feature_splash.domain.util.CheckProfileStatusResponse
@@ -10,7 +10,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 

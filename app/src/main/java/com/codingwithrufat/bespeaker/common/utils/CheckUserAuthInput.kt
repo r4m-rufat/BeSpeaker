@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.common
+package com.codingwithrufat.bespeaker.common.utils
 
 import android.text.TextUtils
 import android.widget.EditText

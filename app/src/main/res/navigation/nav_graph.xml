@@ -20,6 +20,7 @@
             android:id="@+id/action_registerFragment_to_completeProfileFragment"
             app:destination="@id/completeProfileFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.codingwithrufat.bespeaker.features.feature_auth.presentation.login.LoginFragment"
@@ -53,5 +54,14 @@
         android:id="@+id/homeFragment"
         android:name="com.codingwithrufat.bespeaker.features.feature_home.presentation.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_videoCallFragment"
+            app:destination="@id/videoCallFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoCallFragment"
+        android:name="com.codingwithrufat.bespeaker.features.feature_call.presentation.VideoCallFragment"
+        android:label="fragment_video_call"
+        tools:layout="@layout/fragment_video_call" />
 </navigation>

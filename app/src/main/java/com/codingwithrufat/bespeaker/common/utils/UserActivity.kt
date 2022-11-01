@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.features.feature_home.util
+package com.codingwithrufat.bespeaker.common.utils
 
 sealed class UserActivity(val seen: String) {
 

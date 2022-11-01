@@ -2,7 +2,7 @@ package com.codingwithrufat.bespeaker.features.feature_auth.data.repository
 
 import android.net.Uri
 import android.util.Log
-import com.codingwithrufat.bespeaker.common.TAG
+import com.codingwithrufat.bespeaker.common.utils.TAG
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.model.UserRegister
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.repository.CompleteProfile
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.NetworkResponse

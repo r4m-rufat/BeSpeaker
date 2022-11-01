@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.storage
+package com.codingwithrufat.bespeaker.common.storage
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -6,11 +6,11 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 
-class DataStore constructor(private val context: Context){
+private val Context.store: DataStore<Preferences> by preferencesDataStore(
+    name = "user_store"
+)
 
-    private val Context.store: DataStore<Preferences> by preferencesDataStore(
-        name = "user_store"
-    )
+class DataStore constructor(private val context: Context){
 
     suspend fun saveString(key: String, value: String) {
 

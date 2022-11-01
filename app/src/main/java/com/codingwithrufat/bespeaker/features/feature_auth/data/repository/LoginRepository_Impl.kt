@@ -8,38 +8,38 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class LoginRepository_Impl @Inject constructor(
     private val auth: FirebaseAuth,
     private val db: FirebaseFirestore
-): LoginRepository{
+) : LoginRepository {
 
     override suspend fun login(login: UserLogin): Flow<NetworkResponse> = callbackFlow {
 
-        auth.uid?.let {
+        db.collection("users").whereEqualTo("email", login.email)
+            .whereEqualTo("password", login.password)
+            .get()
+            .addOnSuccessListener { snapshots ->
 
-            db.collection("users").whereEqualTo("email", login.email)
-                .whereEqualTo("password", login.password)
-                .get()
-                .addOnSuccessListener {
+                auth.signInWithEmailAndPassword(login.email, login.password)
+                    .addOnSuccessListener {
+                        if (snapshots.documents[0].getBoolean("complete_profile_status") == true) {
+                            trySend(NetworkResponse.SUCCEED(true))
+                        } else {
+                            trySend(NetworkResponse.SUCCEED(false))
+                        }
+                    }.addOnFailureListener {
+                        trySend(NetworkResponse.ERROR(it))
+                    }
 
-                    trySend(NetworkResponse.SUCCEED())
+            }.addOnFailureListener {
+                trySend(NetworkResponse.ERROR(it))
+            }
 
-                }.addOnFailureListener {
-                    trySend(NetworkResponse.ERROR(it))
-                }
-
-        }.run {
-
-            trySend(NetworkResponse.ERROR(NullPointerException("User doesn't exist")))
-
-        }
-
-        awaitClose ()
-
+        awaitClose()
 
     }
 
 }
+

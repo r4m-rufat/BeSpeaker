@@ -13,19 +13,19 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.codingwithrufat.bespeaker.R
-import com.codingwithrufat.bespeaker.common.DatePickerDialog
-import com.codingwithrufat.bespeaker.common.IMAGE_RESULT_OK
-import com.codingwithrufat.bespeaker.common.hideHorizontalProgress
-import com.codingwithrufat.bespeaker.common.showHorizontalProgress
+import com.codingwithrufat.bespeaker.common.utils.*
 import com.codingwithrufat.bespeaker.databinding.FragmentCompleteProfileBinding
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.model.UserRegister
-import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.EnglishLevel
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.GenderType
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.NetworkResponse
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import java.io.FileNotFoundException
 import java.io.InputStream
 import java.util.*
@@ -100,6 +100,16 @@ class CompleteProfileFragment : Fragment() {
             .profileImageLink(imageLink)
             .completeStatus(true)
             .build()
+
+        lifecycleScope.launch {
+            writeUserInformationsToDataStore(
+                requireContext(),
+                FirebaseAuth.getInstance().currentUser!!.uid,
+                binding.editName.text.trim().toString(),
+                EnglishLevel.values()[binding.englishLevelSpinner.selectedItemPosition],
+                imageLink
+            )
+        }
 
         viewModel.completeProfile(userRegister)
 
@@ -230,4 +240,8 @@ class CompleteProfileFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

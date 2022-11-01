@@ -3,21 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/background_green_circle.xml" value="0.1635" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/backround_opacity_white_circle.xml" value="0.1635" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/backround_red_circle.xml" value="0.1635" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/gradient_auth_background.xml" value="0.144" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/gradient_person_profile_add_background.xml" value="0.172" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_back_arrow.xml" value="0.176" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_camera.xml" value="0.172" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1595" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_logo.xml" value="0.1795" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_message.xml" value="0.1755" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_person.xml" value="0.2155" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_phone.xml" value="0.1755" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/ic_videocam.xml" value="0.1755" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/drawable/white_border_background.xml" value="0.1895" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/activity_complete_profile.xml" value="0.2734375" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_complete_profile.xml" value="0.2" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_home.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_login.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_splash.xml" value="0.27447916666666666" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/fragment_video_call.xml" value="0.264" />
         <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/horizontal_progress_bar.xml" value="0.4" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/layout_call_notification_item.xml" value="0.2" />
+        <entry key="..\:/Android Files/BeSpeaker/app/src/main/res/layout/layout_user_item.xml" value="0.264" />
       </map>
     </option>
   </component>

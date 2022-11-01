@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.common
+package com.codingwithrufat.bespeaker.common.utils
 
 import android.app.Activity
 import android.app.DatePickerDialog

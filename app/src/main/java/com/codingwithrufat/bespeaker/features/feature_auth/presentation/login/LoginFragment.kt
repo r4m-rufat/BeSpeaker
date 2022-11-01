@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import com.codingwithrufat.bespeaker.R
 import com.codingwithrufat.bespeaker.databinding.FragmentLoginBinding
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.model.UserLogin
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.NetworkResponse
@@ -62,7 +64,15 @@ class LoginFragment : Fragment() {
                 is NetworkResponse.SUCCEED -> {
 
                     Log.d(TAG, "observeNetworkResponse: User successfully login")
-                    // TODO navigate to Complete Profile screen if profile status is false
+                    /**
+                     * navigate to Complete Profile screen if profile status is false
+                     * otherwise navigate to Home Screen
+                      */
+                    if (response.value == true)
+                        Navigation.findNavController(binding.root).navigate(R.id.homeFragment)
+                    else
+                        Navigation.findNavController(binding.root).navigate(R.id.completeProfileFragment)
+
 
                 }
 

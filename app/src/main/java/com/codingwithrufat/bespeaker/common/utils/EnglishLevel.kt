@@ -1,4 +1,4 @@
-package com.codingwithrufat.bespeaker.features.feature_auth.domain.util
+package com.codingwithrufat.bespeaker.common.utils
 
 enum class EnglishLevel(val string: String) {
 
@@ -7,6 +7,6 @@ enum class EnglishLevel(val string: String) {
     B1("Intermediate"),
     B2("Upper-Intermediate"),
     C1("Advanced"),
-    C2("Fluent"),
+    C2("Fluent");
 
 }

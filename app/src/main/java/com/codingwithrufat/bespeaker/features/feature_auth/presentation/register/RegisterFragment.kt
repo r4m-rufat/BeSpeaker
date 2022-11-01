@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.codingwithrufat.bespeaker.R
-import com.codingwithrufat.bespeaker.common.checkEmail
-import com.codingwithrufat.bespeaker.common.checkPassword
-import com.codingwithrufat.bespeaker.common.equal
+import com.codingwithrufat.bespeaker.common.utils.checkEmail
+import com.codingwithrufat.bespeaker.common.utils.checkPassword
+import com.codingwithrufat.bespeaker.common.utils.equal
 import com.codingwithrufat.bespeaker.databinding.FragmentRegisterBinding
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.model.UserRegister
 import com.codingwithrufat.bespeaker.features.feature_auth.domain.util.NetworkResponse
@@ -43,6 +43,7 @@ class RegisterFragment : Fragment() {
 
         observeUserRegisterState()
         clickedSignUpButton()
+        clickedSignInButton()
 
         return binding.root
     }
@@ -50,6 +51,12 @@ class RegisterFragment : Fragment() {
     private fun clickedSignUpButton() {
         binding.buttonSignup.setOnClickListener {
             registerUser()
+        }
+    }
+
+    private fun clickedSignInButton() {
+        binding.txtSignIn.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.loginFragment)
         }
     }
 
